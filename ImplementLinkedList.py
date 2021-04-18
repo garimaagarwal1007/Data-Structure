@@ -116,4 +116,5 @@ test.print()
 test.insert_at_end(19)
 test.print()
 test.delete(7)
+print("hi")
 
