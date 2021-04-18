@@ -53,6 +53,16 @@ class LinkedList:
         node = Node(val)
         itr.next = node
 
+    def insert_after_value(self, val, data):
+        if self.head is None:
+            self.insert_at_beginning(data)
+        itr = self.head
+        while itr.next:
+            if itr.data == val:
+                itr.next = Node(data, itr.next)
+                break
+            itr = itr.next
+
     def delete(self, val):
         if self.head is None:
             raise Exception("Linked List is empty")
@@ -65,6 +75,34 @@ class LinkedList:
                 itr = itr.next
         if itr.data == val:
             self.remove_last_node()
+
+    def delete_index(self, index):
+        if index < 0:
+            raise Exception("Index can not be less than 0")
+        if index == 0:
+            self.head = self.head.next
+        itr = self.head
+        count = 0
+        while itr.next:
+            if count == index-1:
+                itr.next = itr.next.next
+                break
+            itr = itr.next
+            count += 1
+
+    def remove_by_value(self, val):
+        if self.head is None:
+            raise Exception("Linked List is empty")
+        itr = self.head
+        while itr.next:
+            if itr.data == val:
+                itr.data = itr.next.data
+                itr.next = itr.next.next if itr.next.next else None
+                break
+            itr = itr.next
+            # else:
+            #     itr = itr.next
+
 
     def remove_last_node(self):
         itr = self.head
@@ -115,6 +153,11 @@ test.insert_at(2, 10)
 test.print()
 test.insert_at_end(19)
 test.print()
-test.delete(7)
-print("hi")
+# #test.delete(7)
+# test.delete_index(3)
+# test.print()
+test.insert_after_value(10,5)
+test.print()
+test.remove_by_value(5)
+test.print()
 
